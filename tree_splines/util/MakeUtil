@@ -1,0 +1,33 @@
+#fichier MakeUtil 
+#
+COMPILER = g++ -O3 -c -Wall -I$(INCLUDE) $*.cxx; ar -cqs libSys.a $*.o
+#
+include ../include/INCLUDE_H 
+#
+general : Utils.o Params.o Individual.o Node.o Results.o
+#
+#Observation.o : Observation.cxx $(OBSERVATION_H) 
+#	$(COMPILER)
+# 
+#Node.o : Node.cxx $(NODE_H) $(OBSERVATION_H) 
+#	$(COMPILER)
+# 
+Utils.o : Utils.cxx $(UTILS_H)
+	$(COMPILER)
+# 
+Params.o : Params.cxx $(PARAMS_H) $(UTILS_H)
+	$(COMPILER)
+# 
+Individual.o : Individual.cxx $(PARAMS_H)
+	$(COMPILER)
+#
+# 
+Node.o : Node.cxx $(NODE_H) $(INDIVIDUAL_H)
+	$(COMPILER)
+# 
+Results.o : Results.cxx $(RESULTS_H)
+	$(COMPILER)
+# nettoyage du repertoire courant : blibliotheque et fichiers .o :
+#
+clean : 
+	clear;rm -f *.o *.a -v

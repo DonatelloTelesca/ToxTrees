@@ -1,0 +1,19 @@
+# fichier INCLUDE_H
+#
+INCLUDE = ../include
+UTIL    = ../util
+#
+#COMPILER = g++ -c -I$(INCLUDE) -Wall $*.cxx
+#
+PARAMS_H = $(INCLUDE)/Params.h
+#
+RESULTS_H = $(INCLUDE)/Results.h
+#
+INDIVIDUAL_HXX = $(INCLUDE)/Individual.hxx
+INDIVIDUAL_H = $(INCLUDE)/Individual.h $(INDIVIDUAL_HXX)
+#
+NODE_HXX = $(INCLUDE)/Node.hxx
+NODE_H = $(INCLUDE)/Node.h $(NODE_HXX)
+#SEQUENCECLIENT_HXX = $(INCLUDE)/SequenceClient.hxx
+#SEQUENCECLIENT_H = $(INCLUDE)/SequenceClient.h $(SEQUENCECLIENT_HXX)
+#

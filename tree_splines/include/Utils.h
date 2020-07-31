@@ -1,0 +1,53 @@
+/*
+ * observation.h
+ *
+ *  Created on: 13 juil. 2011
+ *      Author
+ */
+
+#ifndef __UTILS_H__
+#define __UTILS_H__
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include <vector>
+#include <boost/numeric/ublas/matrix_sparse.hpp>
+#include <boost/numeric/ublas/symmetric.hpp>
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/lu.hpp>
+
+#define bnu boost::numeric::ublas
+namespace nsUtils
+{
+	std::vector<std::string> Split (std::string splitter, std::string str) throw ();
+	void Split (std::string splitter, std::string str, int * result) throw ();
+	void Split (std::string splitter, std::string str, double * result) throw ();
+	void Split (std::string splitter, std::string str, bnu::mapped_matrix<double> & result, int & line) throw ();
+	void Split (std::string splitter, std::string str, bnu::symmetric_matrix<double, bnu::lower> & result, int & line) throw ();
+	//void Split (std::string splitter, std::string str, bnu::diagonal_matrix<double, bnu::lower> & result, int & line) throw ();
+	void Display2DArray (int ** array, int _i, int _j) throw ();
+	void Display2DArray (double ** array, int _i, int _j) throw ();
+	int DeterminantSign (const bnu::permutation_matrix<std ::size_t>& pm) throw ();
+	double Determinant( bnu::mapped_matrix<double>& m ) throw ();
+	double Determinant( bnu::matrix<double>& m ) throw ();
+	bool InvertMatrix(const bnu::matrix<double>& input, bnu::matrix<double>& inverse) throw ();
+	bool InvertMatrix(bnu::symmetric_matrix<double, bnu::lower>& input, bnu::symmetric_matrix<double, bnu::lower>& inverse);
+	bool InvertMatrix(bnu::matrix<double>& input, bnu::symmetric_matrix<double, bnu::lower>& inverse);
+	void InvertMatrixChol (const bnu::matrix<double>& input, bnu::matrix<double>& inverse) throw ();
+	void InvertMatrixChol (const bnu::matrix<double>& input, bnu::symmetric_matrix<double>& inverse);
+	void RInvertWishart (bnu::symmetric_matrix<double> &wishart, bnu::symmetric_matrix<double> &wishart_inv, const bnu::matrix<double> & lambda, const int & m) throw ();
+	void Wishart (bnu::matrix<double> &res, const bnu::matrix<double> & lambda, const int & m) throw ();
+	const bnu::symmetric_matrix<double, bnu::lower> kron (const bnu::symmetric_matrix <double, bnu::lower> & lhs, const bnu::symmetric_matrix<double, bnu::lower> & rhs) throw ();
+	bnu::matrix <double> InvARMatrix (const unsigned int & size1, const unsigned int & size2, const double & phi) throw ();
+	double RNorm() throw ();
+	double RChiSq ( const double & df) throw ();
+	double RUnif ( const double & min, const double & max) throw ();
+	double RGamma ( const double & shape, const double & scale) throw ();
+	void AddMatrix (bnu::matrix <double> & a, bnu::matrix <double> b) throw ();
+}
+
+//#include "Observation.hxx"
+
+#undef bnu
+#endif /* __UTILS_H__ */

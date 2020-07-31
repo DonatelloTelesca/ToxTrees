@@ -1,0 +1,41 @@
+1) Open a terminal and open directory "project" with line of command
+cd ..../tree_splines_biostatistics/project
+
+2) Run 
+make clean
+make
+
+3) To run the code, enter
+./tree_splines -f ../data/data_file.csv -i param_file.ini -o test_file.txt
+where data_file is the file containing the data, param_file is the file containing the parameters and test_file is the output from the algorithm. Details for data_file and param_file are presented below. For our simulations, we run
+./tree_splines -f ../data/simul_dose2.csv -i param_simul_dose_posterior_predictive.ini -o test_simul_dose2_posterior_predictive.txt
+for posterior predictive summaries,
+./tree_splines -f ../data/simul_dose2.csv -i param_simul_17.ini -o test_simul_17.txt
+./tree_splines -f ../data/simul_dose2.csv -i param_simul_25.ini -o test_simul_25.txt
+./tree_splines -f ../data/simul_dose2.csv -i param_simul_32.ini -o test_simul_32.txt
+./tree_splines -f ../data/simul_dose2.csv -i param_simul_36.ini -o test_simul_36.txt
+for posterior predictive summaries for curves 17, 25, 32, and 36, in the leave-one-curve-out validation setting,
+/tree_splines -f ../data/simul_dose2.csv -i param_simul_hypercube.ini -o test_simul_hypercube.txt
+for variable sensitivity scores,
+./tree_splines -f ../data/simul_dose2.csv -i param_simul_dose_marginal.ini -o test_simul_dose2_marginal.txt
+for marginal effect of the predictors.
+
+4) data_file.csv should be in csv format with space separator. It should have K columns (number of repetitions) and I * D * T rows (number of nanoparticles, doses and times). Responses should be arranged according to the hierarchy I,D,T. For example if I=2, D=2 and T=3, rows should be organized as
+i=1 d=1 t=1
+i=1 d=1 t=2
+i=1 d=1 t=3
+i=1 d=2 t=1
+i=1 d=2 t=2
+i=1 d=2 t=3
+i=2 d=1 t=1
+i=2 d=1 t=2
+i=2 d=1 t=3
+i=2 d=2 t=1
+i=2 d=2 t=2
+i=2 d=2 t=3
+data_file.csv should be placed in folder "data". See "simul_dose2.csv" for an example.
+
+5) param_file.ini is a text file containing parameters, in folder "project". Details to fill this file can be found in "parameters.txt"
+See "param_simul_dose_posterior_predictive.ini" and "param_simul_dose_marginal.ini" for an example.
+
+6) Once the result text files are ready, run R scripts "post_predictive.R" for plots of posterior predictive summaries, "post_predictive_loo.R" for plots of posterior predictive summaries in the leave-one-curve-out validation setting,"sensitivity_scores.R" for sensitivity scores and "marginal_effect.R" for plots of marginal effects of predictors.
